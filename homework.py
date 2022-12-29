@@ -10,11 +10,11 @@ class InfoMessage:
     calories: float
     training_type: str
     message: str = (
-        'Тип тренировки: {training_type}; ' +
-        'Длительность: {duration:.3f} ч.; ' +
-        'Дистанция: {distance:.3f} км; ' +
-        'Ср. скорость: {speed:.3f} км/ч; ' +
-        'Потрачено ккал: {calories:.3f}.'
+        'Тип тренировки: {training_type}; '
+        + 'Длительность: {duration:.3f} ч.; '
+        + 'Дистанция: {distance:.3f} км; '
+        + 'Ср. скорость: {speed:.3f} км/ч; '
+        + 'Потрачено ккал: {calories:.3f}.'
     )
 
     def get_message(self) -> str:
@@ -121,13 +121,13 @@ class Swimming(Training):
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
         avg_speed: float = self.get_mean_speed()
-        total_kkal: float = ((avg_speed + self.SWIM_K1) *
-                             self.SWIM_K2 * self.weight * self.duration)
+        total_kkal: float = ((avg_speed + self.SWIM_K1)
+                             * self.SWIM_K2 * self.weight * self.duration)
         return total_kkal
 
     def get_mean_speed(self) -> float:
-        return (self.length_pool * self.count_pool /
-                self.M_IN_KM / self.duration)
+        return (self.length_pool * self.count_pool
+                / self.M_IN_KM / self.duration)
 
 
 def read_package(workout_type: str, data: list[int]) -> Training:
