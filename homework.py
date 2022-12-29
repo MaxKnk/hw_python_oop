@@ -166,7 +166,8 @@ def main(training1: Training) -> None:
     """Главная функция."""
 
     info: InfoMessage = training1.show_training_info()
-    print(info.get_message())
+    message: str = info.get_message()
+    print(message)
 
 
 if __name__ == '__main__':
