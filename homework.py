@@ -14,7 +14,7 @@ class InfoMessage:
         self.calories: float = calories
 
     def get_message(self) -> str:
-        message = f'Тип тренировки: {self.training_type};' + \
+        message: str = f'Тип тренировки: {self.training_type};' + \
                   f'Длительность: {self.duration:.3f} ч.; ' + \
                   f'Дистанция: {self.distance:.3f} км;' + \
                   f'Ср. скорость: {self.speed:.3f} км/ч; ' + \
