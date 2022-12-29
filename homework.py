@@ -99,7 +99,7 @@ class SportsWalking(Training):
 
         kkak_multiplier: float = self.CALORIES_WEIGHT_MULTIPLIER * self.weight
         kkal_multiplier_min: float = self.CALORIES_SPEED_HEIGHT_MULTIPLIER \
-                                     * self.weight
+            * self.weight
         speed_mps: float = self.get_mean_speed() * self.KMH_IN_MSEC
         duration_minutes: float = self.duration * self.MIN_IN_H
 
@@ -125,13 +125,13 @@ class Swimming(Training):
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
         avg_speed: float = self.get_mean_speed()
-        total_kkal: float = (avg_speed + self.SWIM_K1) * \
-                            self.SWIM_K2 * self.weight * self.duration
+        total_kkal: float = (avg_speed + self.SWIM_K1) *\
+            self.SWIM_K2 * self.weight * self.duration
         return total_kkal
 
     def get_mean_speed(self) -> float:
-        avg_speed: float = self.length_pool * self.count_pool \
-                           / self.M_IN_KM / self.duration
+        avg_speed: float = self.length_pool * self.count_pool / \
+            self.M_IN_KM / self.duration
         return avg_speed
 
 
