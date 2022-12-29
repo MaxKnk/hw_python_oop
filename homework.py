@@ -10,11 +10,11 @@ class InfoMessage:
     calories: float
     training_type: str
     message: str = (
-            'Тип тренировки: {training_type}; ' +
-            'Длительность: {duration:.3f} ч.; ' +
-            'Дистанция: {distance:.3f} км; ' +
-            'Ср. скорость: {speed:.3f} км/ч; ' +
-            'Потрачено ккал: {calories:.3f}.'
+        'Тип тренировки: {training_type}; ' +
+        'Длительность: {duration:.3f} ч.; ' +
+        'Дистанция: {distance:.3f} км; ' +
+        'Ср. скорость: {speed:.3f} км/ч; ' +
+        'Потрачено ккал: {calories:.3f}.'
     )
 
     def get_message(self) -> str:
@@ -72,7 +72,6 @@ class Running(Training):
     CALORIES_MEAN_SPEED_SHIFT: float = 1.79
 
     def __init__(self, action: int, duration: float, weight: float):
-        type_training = 'Running'
         super().__init__(action, duration, weight)
 
     def get_spent_calories(self) -> float:
@@ -138,8 +137,6 @@ def read_package(workout_type: str, data: list[int]) -> Training:
         'RUN': (Running, 3),
         'WLK': (SportsWalking, 4)
     }
-
-    error: bool = False
 
     if workout_type not in trainings:
         raise ValueError('Incorrect workout type')
