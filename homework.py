@@ -5,21 +5,21 @@ from typing import List
 @dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
+    training_type: str
     duration: float
     distance: float
     speed: float
     calories: float
-    training_type: str
-    message: str = (
+    MESSAGE: str = (
         'Тип тренировки: {training_type}; '
-        + 'Длительность: {duration:.3f} ч.; '
-        + 'Дистанция: {distance:.3f} км; '
-        + 'Ср. скорость: {speed:.3f} км/ч; '
-        + 'Потрачено ккал: {calories:.3f}.'
+        'Длительность: {duration:.3f} ч.; '
+        'Дистанция: {distance:.3f} км; '
+        'Ср. скорость: {speed:.3f} км/ч; '
+        'Потрачено ккал: {calories:.3f}.'
     )
 
     def get_message(self) -> str:
-        return self.message.format(
+        return self.MESSAGE.format(
             training_type=self.training_type,
             duration=self.duration,
             distance=self.distance,
@@ -59,11 +59,11 @@ class Training:
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
         return InfoMessage(
+            type(self).__name__,
             self.duration,
             self.get_distance(),
             self.get_mean_speed(),
-            self.get_spent_calories(),
-            type(self).__name__
+            self.get_spent_calories()
         )
 
 
