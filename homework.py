@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 from typing import List
 
 
@@ -19,13 +19,7 @@ class InfoMessage:
     )
 
     def get_message(self) -> str:
-        return self.MESSAGE.format(
-            training_type=self.training_type,
-            duration=self.duration,
-            distance=self.distance,
-            speed=self.speed,
-            calories=self.calories
-        )
+        return self.MESSAGE.format(**asdict(self))
 
 
 class Training:
@@ -72,14 +66,11 @@ class Running(Training):
     CALORIES_MEAN_SPEED_MULTIPLIER: int = 18
     CALORIES_MEAN_SPEED_SHIFT: float = 1.79
 
-    def __init__(self, action: int, duration: float, weight: float):
-        super().__init__(action, duration, weight)
-
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
         duration_minutes: float = self.duration * self.MIN_IN_H
         return ((self.CALORIES_MEAN_SPEED_MULTIPLIER
-                 * super().get_mean_speed() + self.CALORIES_MEAN_SPEED_SHIFT)
+                 * self.get_mean_speed() + self.CALORIES_MEAN_SPEED_SHIFT)
                 * self.weight / self.M_IN_KM * duration_minutes)
 
 
@@ -121,10 +112,8 @@ class Swimming(Training):
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        avg_speed: float = self.get_mean_speed()
-        total_kkal: float = ((avg_speed + self.SWIM_K1)
-                             * self.SWIM_K2 * self.weight * self.duration)
-        return total_kkal
+        return ((self.get_mean_speed() + self.SWIM_K1)
+                * self.SWIM_K2 * self.weight * self.duration)
 
     def get_mean_speed(self) -> float:
         return (self.length_pool * self.count_pool
@@ -140,7 +129,9 @@ def read_package(workout_type: str, data: List[int]) -> Training:
     }
 
     if workout_type not in trainings:
-        raise ValueError('Incorrect workout type')
+        raise ValueError(f"Incorrect workout type"
+                         f"Возможные варианты: {', '.join(trainings)}"
+                         )
 
     if trainings[workout_type][1] != len(data):
         raise ValueError('Incorrect data type')
