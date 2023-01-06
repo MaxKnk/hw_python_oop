@@ -129,9 +129,9 @@ def read_package(workout_type: str, data: List[int]) -> Training:
     }
 
     if workout_type not in trainings:
-        raise ValueError(f"Incorrect workout type"
-                         f"Возможные варианты: {', '.join(trainings)}"
-                         )
+        training_names = ', '.join(trainings)
+        raise ValueError(f"Incorrect workout type\n"
+                         f"Possible training names: {training_names}")
 
     if trainings[workout_type][1] != len(data):
         raise ValueError('Incorrect data type')
